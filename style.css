@@ -1,0 +1,261 @@
+@import url('https://fonts.googleapis.com/css?family=Barlow:400,500,700');
+
+/* Variables */
+:root {
+  --white: #fff;
+  --black: #232323;
+  --gray: #8d8d8d;
+  --red: #e83f43;
+}
+
+/* General */
+* {
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'Barlow', sans-serif;
+  font-size: 1.125rem;
+  font-weight: 400;
+  line-height: 1.6;
+  color: var(--gray);
+  background: var(--white);
+  text-rendering: optimizeLegibility;
+  overflow-x: hidden;
+}
+
+a {
+  color: var(--gray);
+  text-decoration: none;
+}
+
+/* Navigation */
+nav {
+  position: relative;
+  z-index: 2;
+  padding: 1.25rem 0 1.25rem 0;
+}
+
+nav ul {
+  line-height: 2.2;
+  display: flex;
+  justify-content: flex-start;
+}
+
+nav ul li {
+  margin: 0.325rem 0;
+}
+
+#logo {
+  color: var(--black);
+  font-weight: 700;
+  font-size: 1.125rem;
+}
+
+#highlight {
+  color: var(--red);
+}
+
+/* Images */
+img {
+  width: 100%;
+  height: 43vh;
+  object-fit: cover;
+}
+
+/* Layout */
+.vertical {
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+/* Animations */
+.intro, .description {
+  opacity: 0;
+}
+
+/* Slider */
+.slider-item {
+  display: none;
+}
+
+.slider-item.active {
+  display: block;
+}
+
+/* Controls */
+.controls {
+  display: flex;
+  justify-content: flex-end;
+  padding: 0.25rem 0 0.25rem 0;
+}
+
+.controls .previous, .controls .next {
+  border: 1px solid var(--black);
+  font-size: 2rem;
+  color: var(--black);
+}
+
+.controls .previous:hover .icon, .controls .next:hover .icon {
+  transform: scale(1.5);
+}
+
+.controls .icon {
+  position: relative;
+  margin: auto;
+  width: 20px;
+  height: 1px;
+  background-color: currentColor;
+  transition: transform 0.1s ease;
+}
+
+.controls .icon.arrow-left::before {
+  content: '';
+  position: absolute;
+  left: 1px;
+  top: -4px;
+  width: 9px;
+  height: 9px;
+  border-top: solid 1px currentColor;
+  border-right: solid 1px currentColor;
+  transform: rotate(-135deg);
+}
+
+.controls .icon.arrow-right::before {
+  content: '';
+  position: absolute;
+  right: 1px;
+  top: -4px;
+  width: 9px;
+  height: 9px;
+  border-top: solid 1px currentColor;
+  border-right: solid 1px currentColor;
+  transform: rotate(45deg);
+}
+
+.active .image-holder::before {
+  position: absolute;
+  content: '';
+  z-index: 1;
+  display: block;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: var(--white);
+  transform-origin: 100% 50%;
+  animation: revealRight 1s cubic-bezier(0.23,1,0.75,1) forwards;
+}
+
+/* Keyframes */
+@keyframes revealRight {
+  0% {
+    transform: scaleX(1);
+  }
+  100% {
+    transform: scaleX(0);
+  }
+}
+
+@keyframes fadeIn {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
+@keyframes fadeInLeft {
+  0% {
+    opacity: 0;
+    transform: translateX(20%);
+  }
+  100% {
+    opacity: 1;
+    transform: translate(0);
+  }
+}
+
+/* Media Queries */
+@media (min-width: 768px) {
+  nav ul {
+    justify-content: flex-end;
+  }
+
+  #logo {
+    font-size: 1.25rem;
+  }
+
+  .controls {
+    padding: 1.75rem 0 1.75rem 0;
+  }
+
+  .intro {
+    animation: fadeInLeft 0.8s 0.4s ease forwards;
+  }
+
+  .intro .title {
+    font-size: 4.25rem;
+    padding: 2.5rem 2.5rem 3rem 2.5rem;
+    background: var(--white);
+  }
+
+  img {
+    height: 60vh;
+  }
+
+  .description {
+    font-size: 1.25rem;
+    margin: 1rem 0 0 0;
+  }
+
+  .previous, .next {
+    flex-basis: 8.33%;
+  }
+
+  .slider-item.active .hide-mobile {
+    display: block;
+  }
+
+  .slider-item.active .show-mobile {
+    display: none;
+  }
+
+  .toggle-nav {
+    display: none;
+  }
+
+  nav ul {
+    display: flex;
+    flex-direction: row;
+    position: relative;
+    padding: 0;
+    justify-content: flex-end;
+  }
+
+  nav {
+    padding: 1.75rem 0 1.75rem 0;
+  }
+
+  nav ul li {
+    font-size: 1rem;
+    text-transform: uppercase;
+    margin: 0 2rem 0 0;
+  }
+
+  nav ul li:nth-child(3) {
+    margin: 0;
+  }
+}
+
+.visually-hidden {
+  clip: rect(0 0 0 0);
+  clip-path: inset(50%);
+  height: 1px;
+  overflow: hidden;
+  position: absolute;
+  white-space: nowrap;
+  width: 1px;
+}
